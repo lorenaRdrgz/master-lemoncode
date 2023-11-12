@@ -1,0 +1,8 @@
+$backcolor:pink;
+.result-background {
+    background-color: $backcolor;
+}
+
+:global(.card){
+    background-color: plum;
+}
