@@ -1,6 +1,6 @@
 import React from "react";
-import { MemberTable } from "./member-table";
+import { Demo } from "./demo";
 
 export const App = () => {
-  return <MemberTable/>
-};
+  return <Demo />;
+}
