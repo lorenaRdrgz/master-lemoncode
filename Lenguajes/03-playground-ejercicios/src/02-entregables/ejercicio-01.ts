@@ -12,7 +12,8 @@ console.log("TAIL: ", tail(array1));
 console.log("TAIL: ", tail(array2));
 
 //INIT
-const init = (array) => { array.pop(); return array }
+const init = (array) => { return array.slice(0, array.length - 1) }
+// console.log(array1 === init(array1));
 console.log("INIT: ", init(array1));
 console.log("INIT: ", init(array2));
 
