@@ -9,8 +9,3 @@ export const getMembers = (org: string): Promise<vm.Member[]> => {
 export const getMembersLogin = (org: string): Promise<string[]> => {
     return api.getMembers(org).then((members) => members.map((member) => member.login));
 }
-
-
-export const getCharactersLogin = (): Promise<string[]> => {
-    return api.getCharacter().then((characters) => characters.map((character) => character.name));
-}

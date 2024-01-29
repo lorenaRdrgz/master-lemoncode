@@ -4,11 +4,11 @@ import { routes } from "@/router";
 import { Button, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
-export const MemberSearch: React.FC = () => {
+export const CharacterSearch: React.FC = () => {
   return (
     <>
       <div className="buscador">
-        <TextField id="outlined-basic" label="Company" variant="outlined" />
+        <TextField id="outlined-basic" label="Character" variant="outlined" />
         <Button type="submit" variant="contained">
           <SearchIcon />
           Search
