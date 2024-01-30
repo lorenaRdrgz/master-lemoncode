@@ -10,7 +10,7 @@ interface Props {
 export const CharacterListContainer: React.FC<Props> = (props) => {
   const { onSelect } = props;
   const [characters, setCharacter] = React.useState<Character[]>([]);
-
+console.log(characters);
   React.useEffect(() => {
     getCharacter().then(setCharacter);
   }, []);
