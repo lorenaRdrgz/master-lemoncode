@@ -3,6 +3,8 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
+
 import { TextField } from "@/common/components/text-field.component";
 
 import {
@@ -29,21 +31,21 @@ export const Login: React.FC<Props> = (props) => {
 
   const handleChange =
     (field: keyof LoginFormData) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      formValidation
-        .validateField(field, e.target.value)
-        .then((validationResult) => {
-          setErrors({
-            ...errors,
-            [field]: validationResult.message,
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        formValidation
+          .validateField(field, e.target.value)
+          .then((validationResult) => {
+            setErrors({
+              ...errors,
+              [field]: validationResult.message,
+            });
           });
-        });
 
-      setFormData({
-        ...formData,
-        [field]: e.target.value,
-      });
-    };
+        setFormData({
+          ...formData,
+          [field]: e.target.value,
+        });
+      };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,9 +58,9 @@ export const Login: React.FC<Props> = (props) => {
 
   return (
     <Card sx={{ padding: "20px" }}>
-      <CardHeader title="Login" />
+      <CardHeader title="Inicio" />
       <CardContent>
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}>
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             <TextField
               name="username"
@@ -81,7 +83,14 @@ export const Login: React.FC<Props> = (props) => {
               Login!
             </Button>
           </div>
-        </form>
+        </form> */}
+        <Link href="/list" underline="hover">
+          GitHub API
+        </Link>
+        <br /><br />
+        <Link href="/character" underline="hover">
+          Rick & Morty API
+        </Link>
       </CardContent>
     </Card>
   );
