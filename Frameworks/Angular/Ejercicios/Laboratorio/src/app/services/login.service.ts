@@ -36,6 +36,12 @@ export class LoginService {
           logged = result.value;
         }
       });
+    // if (localStorage.getItem('logged') == 'true') {
+    //   logged = true;
+    // }
+    // else {
+    //   logged = false;
+    // }
     return logged;
   }
 

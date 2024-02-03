@@ -12,6 +12,7 @@ export class MessageService {
   constructor() { }
 
   send(message: Message) {
+    // localStorage.setItem(message.key, message.value);
     this.subject.next(message);
   }  
 

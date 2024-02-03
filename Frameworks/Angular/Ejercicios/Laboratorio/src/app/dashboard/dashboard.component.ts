@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HighlightDirective } from '../directives/highlight.directive';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -15,4 +15,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class DashboardComponent {
 
+  constructor(){
+  }
 }

@@ -35,18 +35,18 @@ import { Message } from './model/message.model';
 })
 export class AppComponent {
 
-constructor(private messageService: MessageService,){
-  
-}
+  constructor(private messageService: MessageService,) {
 
-  title:string = 'app';
-  logged:boolean = false;
-  username:string='';
+  }
+
+  title: string = 'app';
+  logged: boolean = false;
+  username: string = '';
 
   escribeLog($event: string) {
     console.log($event);
   }
- 
+
   ngOnInit(): void {
     this.messageService.get()
       .subscribe((result: Message) => {
@@ -57,6 +57,15 @@ constructor(private messageService: MessageService,){
           this.username = result.value;
         }
       });
+
+    // if (localStorage.getItem('logged') == 'true') {
+    //   this.logged = true;
+    // }
+    // else {
+    //   this.logged = false;
+    // }
+    // this.username = localStorage.getItem('username') || ''
+
   }
 
 }

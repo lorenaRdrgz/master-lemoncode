@@ -23,11 +23,11 @@ export class LoginComponent {
   error: boolean = false;
 
   constructor(
-    private router: Router, 
-    private route: ActivatedRoute, 
+    private router: Router,
+    private route: ActivatedRoute,
     private loginService: LoginService,
     private messageService: MessageService
-    ) {
+  ) {
     this.user = {
       username: '',
       password: ''
@@ -35,8 +35,6 @@ export class LoginComponent {
   }
 
   submit() {
-    
-
     if (this.loginService.login(this.user)) {
       this.error = false;
       this.messageService.send({ key: 'username', value: this.user.username });
