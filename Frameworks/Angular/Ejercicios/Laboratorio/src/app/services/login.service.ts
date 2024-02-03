@@ -2,37 +2,44 @@ import { Injectable } from '@angular/core';
 import { LoginEntity } from '../model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { MessageService } from './message.service';
+import { Message } from '../model/message.model';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  
-  constructor(private http: HttpClient) { }
-  
-  logged:boolean=false;
+
+  constructor(private http: HttpClient, private messageService: MessageService) { }
+
 
   login(user: LoginEntity) {
     if (user.username === 'master@lemoncode.net' && user.password === '12345678') {
-      this.logged = true;
       return true;
     }
     else {
-      this.logged = false;
       return false;
     }
   }
 
-  logout(){
-    this.logged = false;
+  logout() {
+    this.messageService.send({ key: 'username', value: '' });
+    this.messageService.send({ key: 'logged', value: false });
   }
 
-  isLogged(){
-    return this.logged;
+  isLogged() {
+    let logged: boolean = false;
+    this.messageService.get()
+      .subscribe((result: Message) => {
+        if (result.key === 'logged') {
+          logged = result.value;
+        }
+      });
+    return logged;
   }
 
-  getUsername(user: LoginEntity){
+  getUsername(user: LoginEntity) {
     return user.username;
   }
 }

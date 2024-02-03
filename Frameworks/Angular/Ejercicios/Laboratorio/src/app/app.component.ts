@@ -10,6 +10,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GaleriaComponent } from './galeria/galeria.component';
 import { CRUDComponent } from './crud/crud.component';
+import { MessageService } from './services/message.service';
+import { Message } from './model/message.model';
 
 @Component({
   selector: 'app-root',
@@ -32,9 +34,29 @@ import { CRUDComponent } from './crud/crud.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'app';
+
+constructor(private messageService: MessageService,){
+  
+}
+
+  title:string = 'app';
+  logged:boolean = false;
+  username:string='';
 
   escribeLog($event: string) {
     console.log($event);
   }
+ 
+  ngOnInit(): void {
+    this.messageService.get()
+      .subscribe((result: Message) => {
+        if (result.key === 'logged') {
+          this.logged = result.value;
+        }
+        if (result.key === 'username') {
+          this.username = result.value;
+        }
+      });
+  }
+
 }
