@@ -8,10 +8,11 @@ import { CRUDComponent } from './crud/crud.component';
 import { GaleriaComponent } from './galeria/galeria.component';
 
 export const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'login', component: GaleriaComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard/:user', component: DashboardComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'crud', component: CRUDComponent },
   { path: 'galeria', component: GaleriaComponent },

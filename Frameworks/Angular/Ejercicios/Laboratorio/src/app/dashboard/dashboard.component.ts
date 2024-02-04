@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HighlightDirective } from '../directives/highlight.directive';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, Params, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +14,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-
-  constructor(){
+  username: string = '';
+  constructor(private route: ActivatedRoute) {
+    this.route.params.subscribe((params: Params) => this.username = params['user']);
   }
 }

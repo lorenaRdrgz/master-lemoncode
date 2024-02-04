@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { HighlightDirective } from '../directives/highlight.directive';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf, SlicePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon'
 
 class Imagen {
   id: number;
@@ -25,7 +25,9 @@ class Imagen {
     NgFor,
     NgIf,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    NgClass,
+    SlicePipe
   ],
   templateUrl: './galeria.component.html',
   styleUrl: './galeria.component.css'
@@ -33,11 +35,13 @@ class Imagen {
 
 export class GaleriaComponent {
   listaImagenes: Imagen[] = [];
-  listaIndexMiniaturas: any[] = [];
   imagenSeleccionada: Imagen = new Imagen();
   play: boolean = false;
   width: number = 400;
   heigth: number = 250;
+  grades: number = 0;
+  start: number = 0;
+  end: number = 3;
 
   constructor() {
     this.listaImagenes.push({ id: 1, src: '../../../assets/pictures/1.jpg', title: 'paisaje 1' });
@@ -50,52 +54,60 @@ export class GaleriaComponent {
     this.listaImagenes.push({ id: 8, src: '../../../assets/pictures/8.jpg', title: 'paisaje 9' });
 
     this.imagenSeleccionada = this.listaImagenes[0];
-
-    this.listaIndexMiniaturas = [{id:0},{id:1},{id:2}];
   }
 
   onImageClick(imagen: Imagen) {
     this.imagenSeleccionada = imagen;
+
+    if (imagen.id > 5) {
+      this.start = 5;
+      this.end = 8;
+    }
+    else if (imagen.id == 1) {
+      this.start = 0;
+      this.end = 3;
+    }
+    else {
+      this.start = imagen.id - 1;
+      this.end = imagen.id + 2;
+    }
   }
 
   onImageNext() {
     let index = this.imagenSeleccionada.id;
-
-    if (index > 7) {
-      index = 0;
+    if (index > 5) {
+      this.start = 5;
+      this.end = 8;
     }
-
-    this.listaIndexMiniaturas.forEach(x=>{
-      x.id++;
-      if (x.id > 7) {
-        x.id = 0;
-      }
-    });
-
+    else {
+      this.start++;
+      this.end++;
+    }
     this.imagenSeleccionada = this.listaImagenes[index];
   }
 
   onImagePreviuos() {
     let index = this.imagenSeleccionada.id - 2;
 
-    if (index < 0) {
-      index = 7;
+    if (index < 1) {
+      this.start = 0;
+      this.end = 3;
+    }
+    else {
+      this.start--;
+      this.end--;
     }
 
-    this.listaIndexMiniaturas.forEach(x=>{
-      x.id--;
-      if (x.id < 0) {
-        x.id = 7;
-      }
-    });
-    
     this.imagenSeleccionada = this.listaImagenes[index];
   }
 
   onImagePlayStop() {
     this.play = !this.play;
+    console.log(this.play)
     if (this.play) {
-      setTimeout(this.onImageNext, 500);
+      setTimeout(() => {
+        this.onImageNext();
+      }, 1000);
     }
   }
 
@@ -108,9 +120,10 @@ export class GaleriaComponent {
       this.width = this.width - 10;
       this.heigth = this.heigth - 5;
     }
+  }
 
-    console.log(this.width);
-    console.log(this.heigth);
+  onImageRotate() {
+    this.grades = this.grades + 10;
   }
 
 }

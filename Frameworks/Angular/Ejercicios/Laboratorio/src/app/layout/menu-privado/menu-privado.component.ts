@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HighlightDirective } from '../../directives/highlight.directive';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIf } from '@angular/common';
@@ -18,12 +18,13 @@ import { LoginService } from '../../services/login.service';
 })
 
 export class MenuPrivadoComponent implements OnInit {
+  @Input() username!:string;
   logged: boolean = true;
   constructor(private loginService: LoginService) {
 
   }
 
   ngOnInit() {
-    // this.logged = this.loginService.isLogged();
+    
   }
 }

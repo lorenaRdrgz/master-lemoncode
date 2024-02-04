@@ -10,9 +10,11 @@ header {
   text-align: center;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
+
 h1{
   margin: 20px;
 }
+

@@ -2,7 +2,7 @@
 <app-header-privada *ngIf="logged" [username]="username"></app-header-privada>
 
 <app-menu-publico *ngIf="!logged"></app-menu-publico>
-<app-menu-privado *ngIf="logged"></app-menu-privado>
+<app-menu-privado *ngIf="logged" [username]="username"></app-menu-privado>
 
 <router-outlet></router-outlet>
 

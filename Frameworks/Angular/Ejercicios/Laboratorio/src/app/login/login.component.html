@@ -1,25 +1,26 @@
 <mat-card>
   <mat-card-title>Login</mat-card-title>
   <mat-card-content>
-    <form #addForm="ngForm"  (ngSubmit)="submit()">
+    <form [formGroup]="editForm"  >
       <p>
         <mat-form-field>
-          <input [(ngModel)]="user.username" type="text" matInput placeholder="Username" name="username">
+          <input type="text" matInput placeholder="Username" formControlName="username">
+          <small *ngIf="usernameControl.errors?.['required']" class="error">Campo obligatorio.</small>
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field>
-          <input [(ngModel)]="user.password" type="password" matInput placeholder="Password" name="password">
+          <input type="password" matInput placeholder="Password" formControlName="password">
+          <small *ngIf="passwordControl.errors?.['required']" class="error">Campo obligatorio.</small>
+          <small *ngIf="passwordControl.errors?.['minlength']" class="error">La contraseña debe tener al menos 8 caracteres.</small>
         </mat-form-field>
       </p>
-
-      <p *ngIf="error" class="error">
+      <small *ngIf="error" class="error">
         Usuario o Contraseña incorrectos.
-      </p>
-
+      </small>
       <div class="button">
-        <button type="submit" mat-stroked-button >Login</button>
+        <button type="button" mat-stroked-button (click)="submit()">Login</button>
       </div>
 
     </form>

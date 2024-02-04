@@ -1,18 +1,19 @@
 <div class="container">
     <div class="marco" [style.width]="width+'px'" [style.heigth]="heigth+'px'">
-        <img [src]="imagenSeleccionada.src" [alt]="imagenSeleccionada.title" [title]="imagenSeleccionada.title" >
+        <img [src]="imagenSeleccionada.src" [alt]="imagenSeleccionada.title" [title]="imagenSeleccionada.title" [style.transform]="'rotate('+grades+'deg)'">
     </div>
     <div class="botonera">
-        <button mat-raised-button (click)="onImagePreviuos()"><mat-icon>navigate_before</mat-icon> Anterior </button>
-        <button mat-raised-button (click)="onImageNext()"> Siguiente <mat-icon>navigate_next</mat-icon></button>
+        <button mat-raised-button (click)="onImagePreviuos()" [disabled]="imagenSeleccionada.id == 1"><mat-icon>navigate_before</mat-icon> Anterior </button>
         <button mat-raised-button (click)="onImageSize(true)"><i class="material-icons">add</i> Aumentar</button>
-        <button mat-raised-button (click)="onImageSize(false)"><i class="material-icons">remove</i> Disminuir</button>
+        <button mat-raised-button (click)="onImageRotate()"><i class="material-icons">refresh</i> Rotar</button>
         <button *ngIf="!play" mat-raised-button (click)="onImagePlayStop()"><i class="material-icons">play_circle</i> Play</button>
         <button *ngIf="play" mat-raised-button (click)="onImagePlayStop()"><i class="material-icons">stop_circle</i> Stop</button>
+        <button mat-raised-button (click)="onImageSize(false)"><i class="material-icons">remove</i> Disminuir</button>
+        <button mat-raised-button (click)="onImageNext()" [disabled]="imagenSeleccionada.id == 7"> Siguiente <mat-icon>navigate_next</mat-icon></button>
     </div>
     <div class="lista">
-        <div *ngFor="let index of listaIndexMiniaturas">
-            <img [src]="listaImagenes[index.id].src" [alt]="listaImagenes[index.id].title" [title]="listaImagenes[index.id].title" (click)=" onImageClick(listaImagenes[index.id])">
+        <div *ngFor="let img of listaImagenes | slice:start:end">
+            <img [ngClass]="{'selectedImage' : img.id == imagenSeleccionada.id}" [src]="img.src" [alt]="img.title" [title]="img.title" (click)=" onImageClick(img)">
         </div>
     </div>
 </div>

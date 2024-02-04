@@ -7,14 +7,19 @@ header {
   background-color: #333;
   color: #fff;
   padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
-
 
 .cabecera {
   text-align: center;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -22,17 +27,12 @@ h1 {
   margin: 20px;
 }
 
-.button{
-  float:right;
-}
-
 button {
   background-color: aliceblue;
   color: #333;
 }
 
-label{
-  color:white;
+label {
+  color: white;
   margin-right: 20px;
 }
-
