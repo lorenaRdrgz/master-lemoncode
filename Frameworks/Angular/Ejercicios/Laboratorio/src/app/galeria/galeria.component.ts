@@ -103,12 +103,21 @@ export class GaleriaComponent {
 
   onImagePlayStop() {
     this.play = !this.play;
-    console.log(this.play)
     if (this.play) {
-      setTimeout(() => {
-        this.onImageNext();
-      }, 1000);
+      this.playImages();
     }
+  }
+
+  playImages() {
+    if (!this.play) {
+      return;
+    }
+
+    this.onImageNext();
+
+    setTimeout(() => {
+      this.playImages();
+    }, 1000);
   }
 
   onImageSize(aumenta: boolean) {
