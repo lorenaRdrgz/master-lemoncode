@@ -22,7 +22,7 @@
               aria-description="Marcar elemento de la lista como seleccionado o deseleccionado">
             <p class="w-full text-grey-darkest text-lg" :class="{ 'line-through': item.estado }">{{ item.tarea }}</p>
             <button class="flex-no-shrink p-2 ml-2 border-2 rounded bg-slate-700 text-white border-white"
-              aria-description="Editar elemento de la lista" v-on:click="item.editar=true">
+              aria-description="Editar elemento de la lista" v-on:click="item.editar = true">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -59,28 +59,28 @@ defineOptions({
   name: 'ToDo List'
 });
 
-let items = [{ id: 1, tarea: 'Ir a la compra', estado: false, editar: false }, { id: 2, tarea: 'Ir al gimnasio', estado: true, editar: false }, { id: 3, tarea: 'Fiesta a las 12h', estado: false, editar: false }]
+let items = ref([{ id: 1, tarea: 'Ir a la compra', estado: false, editar: false }, { id: 2, tarea: 'Ir al gimnasio', estado: true, editar: false }, { id: 3, tarea: 'Fiesta a las 12h', estado: false, editar: false }]);
 
 
 const onSubmit = () => {
-  let id = items[items.length - 1].id + 1
-  items.push({ id: id, tarea: tarea.value, estado: false, editar: false });
+  let id = items.value[items.value.length - 1].id + 1
+  items.value.push({ id: id, tarea: tarea.value, estado: false, editar: false });
+  tarea.value = '';
 }
 
 const onClickEliminar = (item: any) => {
   let newItems = new Array();
-  items.forEach(x => {
+  items.value.forEach(x => {
     if (x.id != item.id) {
       newItems.push(x);
     }
   });
 
-  items = newItems;
+  items.value = newItems;
 }
 
 const onClickEditarTexto = (item: any) => {
   item.editar = false;
-  console.log(items)
 }
 
 const tarea = ref('');
