@@ -63,8 +63,15 @@ let items = ref([{ id: 1, tarea: 'Ir a la compra', estado: false, editar: false 
 
 
 const onSubmit = () => {
-  let id = items.value[items.value.length - 1].id + 1
-  items.value.push({ id: id, tarea: tarea.value, estado: false, editar: false });
+  let index = 0;
+  let lastItemPosition = 0;
+
+  if(items.value.length > 0){
+    lastItemPosition = items.value.length - 1;
+    index = items.value[lastItemPosition].id + 1
+  }
+  
+  items.value.push({ id: index, tarea: tarea.value, estado: false, editar: false });
   tarea.value = '';
 }
 
