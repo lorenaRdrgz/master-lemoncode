@@ -1,9 +1,9 @@
 import React from "react";
-import { Card, CardHeader, CardContent, Button, TextField, Alert } from "@mui/material";
+import { Card, CardHeader, CardContent, Button, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { switchRoutes } from "@/router/routes";
-
-
+import { routes } from "@/router/routes";
+import { TextField } from "@/common/components/text-field.component";
+import { UserProfileContext } from "@/core/providers/user-profile/user-profile.context";
 interface LoginInfo {
     login: string;
     password: string;
@@ -11,14 +11,17 @@ interface LoginInfo {
 
 export const LoginComponent: React.FC = () => {
     const [loginInfo, setLoginInfo] = React.useState<LoginInfo>({ login: '', password: '' });
+    const [error, setError] = React.useState<boolean>(false);
+    const  {username, setUsername} = React.useContext(UserProfileContext);
     const navigate = useNavigate();
     const handleNavigation = (e) => {
         e.preventDefault();
         if (loginInfo.login == 'admin' && loginInfo.password == 'test') {
-            navigate(switchRoutes.home);
+            setUsername(loginInfo.login);
+            navigate(routes.home);
         }
         else {
-            alert("Usuario o contraseña incorrectos.");
+            setError(true);
         }
     }
     return <>
@@ -52,9 +55,11 @@ export const LoginComponent: React.FC = () => {
                     </div>
                 </form>
             </CardContent>
-            {/* <Alert severity="error">
-                Usuario o contraseña incorrectos.
-            </Alert> */}
+            {error && (
+                <Alert severity="error">
+                    Usuario o contraseña incorrectos.
+                </Alert>
+            )}
         </Card >
     </>
 };

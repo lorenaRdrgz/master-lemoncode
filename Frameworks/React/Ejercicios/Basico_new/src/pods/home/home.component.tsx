@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card, CardContent, CardHeader } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { switchRoutes } from "@/router/routes";
+import { routes } from "@/router/routes";
 
 
 export const HomeComponent: React.FC = () => {
@@ -15,7 +15,7 @@ export const HomeComponent: React.FC = () => {
                         type="button"
                         variant="contained"
                         onClick={() => {
-                            navigate(switchRoutes.github);
+                            navigate(routes.github);
                         }}
                     >
                         GitHub
@@ -25,7 +25,7 @@ export const HomeComponent: React.FC = () => {
                         type="button"
                         variant="contained"
                         onClick={() => {
-                            navigate(switchRoutes.rick);
+                            navigate(routes.rick);
                         }}
                     >
                         Rick & Morty
@@ -35,7 +35,7 @@ export const HomeComponent: React.FC = () => {
                         type="button"
                         variant="contained"
                         onClick={() => {
-                            navigate(switchRoutes.login);
+                            navigate(routes.login);
                         }}
                     >
                         Volver

@@ -1,6 +1,13 @@
 import React from "react";
-import { AppRouter } from "./router/app.router";
+import { AppRouter } from "@/router/app.router";
+import { UserProfileProvider } from "./core/providers/user-profile/user-profile.provider";
 
 export const App = () => {
-  return <AppRouter />;
+  return (
+    <>
+      <UserProfileProvider>
+          <AppRouter />
+      </UserProfileProvider>
+    </>
+  );
 };

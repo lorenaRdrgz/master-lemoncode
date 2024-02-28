@@ -1,0 +1,22 @@
+.layout-app-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr;
+}
+
+.layout-app-header {
+  color: white;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 5px;
+}
+
+.avatar {
+    width: 80px;
+    border-radius: 100%;
+}
+
+
+
