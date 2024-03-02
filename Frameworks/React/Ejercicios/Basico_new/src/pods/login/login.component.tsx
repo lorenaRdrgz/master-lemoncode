@@ -1,29 +1,20 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { Card, CardHeader, CardContent, Button, Alert } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { routes } from "@/router/routes";
 import { TextField } from "@/common/components/text-field.component";
-import { UserProfileContext } from "@/core/providers/user-profile/user-profile.context";
-interface LoginInfo {
-    login: string;
-    password: string;
+interface Props {
+    onLogin: (username:string, password:string) => void,
+    error:boolean    
 }
 
-export const LoginComponent: React.FC = () => {
-    const [loginInfo, setLoginInfo] = React.useState<LoginInfo>({ login: '', password: '' });
-    const [error, setError] = React.useState<boolean>(false);
-    const  {username, setUsername} = React.useContext(UserProfileContext);
-    const navigate = useNavigate();
-    const handleNavigation = (e) => {
+export const LoginComponent: React.FC<Props> = (props) => {
+    const { onLogin, error } = props;
+    const [loginInfo, setLoginInfo] = React.useState<LoginInfo>({ username: '', password: '' });
+
+    const handleNavigation = (e: FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
-        if (loginInfo.login == 'admin' && loginInfo.password == 'test') {
-            setUsername(loginInfo.login);
-            navigate(routes.home);
-        }
-        else {
-            setError(true);
-        }
+        onLogin(loginInfo.username, loginInfo.password);
     }
+
     return <>
         <Card sx={{ padding: "20px" }}>
             <CardHeader title="Login" />
@@ -32,10 +23,10 @@ export const LoginComponent: React.FC = () => {
                     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                         <TextField
                             type="text"
-                            value={loginInfo.login}
+                            value={loginInfo.username}
                             onChange={(e) => setLoginInfo({
                                 ...loginInfo,
-                                login: e.target.value,
+                                username: e.target.value,
                             })}
                             placeholder="Login" />
                         <TextField

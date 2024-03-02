@@ -7,7 +7,7 @@ export const GitHubListScene: React.FC = () => {
     <AppLayout>
       <div style={{ display: "flex" }}>
         <div>
-          <GitHubListContainer org="lemoncode" />
+          <GitHubListContainer/>
         </div>
       </div>
     </AppLayout>

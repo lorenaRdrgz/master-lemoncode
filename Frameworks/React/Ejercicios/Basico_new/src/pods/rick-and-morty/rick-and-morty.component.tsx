@@ -1,37 +1,45 @@
-import React, { useEffect } from "react";
-import { Button, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
+import React, { FormEvent, useEffect } from "react";
+import { Button, Card, CardActionArea, CardContent, CardMedia, IconButton, Paper, Table, TableBody, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/router/routes";
-import Paper from '@mui/material/Paper';
+import { CharacterEntity } from "./rick-and-morty.vm";
 import { StyledTableCell } from "@/common/components/styled-table-cell.component";
+import { TextField } from "@/common/components/text-field.component";
 import { StyledTableRow } from "@/common/components/styled-table-row.component";
 
-interface CharacterEntity {
-    id: number
-    name: string
-    status: string
-    species: string
-    type: string
-    gender: string
-    image: string
-    url: string
-    created: string
+interface Props {
+    characters: CharacterEntity[];
+    onSearch: (name: string) => void;
 }
 
-export const RickAndMortyComponent: React.FC = () => {
-    const [characters, setCharacters] = React.useState<CharacterEntity[]>();
+export const RickAndMortyComponent: React.FC<Props> = (props) => {
+    const { characters, onSearch } = props;
+    const [name, setName] = React.useState('Rick');
     const navigate = useNavigate();
 
-    React.useEffect(() => {
-        fetch(`https://rickandmortyapi.com/api/character/1,2,3,4,5,6,7,8,9,10`)
-            .then(response => response.json()
-                .then(json => setCharacters(json)))
-    }, []);
+    const handleSearch = (e: FormEvent<HTMLFormElement>) =>{
+        e.preventDefault();
+        onSearch(name);
+    }
 
     return <>
         <div>
-            <h1> Rick and Morty: </h1>
+            <h1>Rick and Morty Character: {name.toLocaleUpperCase()}</h1>
             <br />
+            <form className="buscador" onSubmit={handleSearch}>
+                <TextField
+                    className="txtBusqueda"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Buscar..."
+                    label="Nombre"
+                />
+                <IconButton type="submit" aria-label="search">
+                    <SearchIcon className="lupa" style={{ fill: "black" }} />
+                </IconButton>
+            </form>
             <hr />
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">

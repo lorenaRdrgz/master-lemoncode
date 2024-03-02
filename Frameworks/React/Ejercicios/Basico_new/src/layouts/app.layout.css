@@ -14,9 +14,19 @@
 }
 
 .avatar {
-    width: 80px;
-    border-radius: 100%;
+  width: 80px;
+  border-radius: 100%;
 }
 
+.lupa {
+  width: 1.5em !important;
+  height: 1.5em !important;
+}
 
+.buscador {
+  width: 100%;
+}
 
+.txtBusqueda {
+  width: 90%;
+}

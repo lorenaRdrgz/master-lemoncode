@@ -1,38 +1,21 @@
 import React from "react";
 import { Button, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { routes } from "@/router/routes";
+import { MemberDetailEntity } from "./github-details.vm";
 
-interface MemberDetailEntity {
-    id: string;
-    name: string;
-    company: string;
-    bio: string;
-    login: string;
-    avatar_url: string;
+interface Props{
+    member: MemberDetailEntity;
 }
 
-const createDefaultMemberDetail = (): MemberDetailEntity => ({
-    id: '',
-    name: '',
-    company: '',
-    bio: '',
-    login: '',
-    avatar_url: ''
-});
 
-export const GitHubDetailsComponent: React.FC = () => {
-    const { id } = useParams();
-    const [member, setMember] = React.useState(createDefaultMemberDetail());
+export const GitHubDetailsComponent: React.FC<Props> = (props) => {
+    const {member} = props;
     const navigate = useNavigate();
     const handleNavigation = () => {
         navigate(routes.github);
     }
-    React.useEffect(() => {
-        fetch(`https://api.github.com/user/${id}`)
-            .then(response => response.json()
-                .then(json => setMember(json)))
-    }, []);
+
     return <>
         <div>
             <h1>Github Detalle {member.login}</h1>

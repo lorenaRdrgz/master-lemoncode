@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { FormEvent, useEffect } from "react";
 import { Button, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
+import { TextField } from "@/common/components/text-field.component";
+import { IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/router/routes";
-import { TextField } from "@/common/components/text-field.component";
 import Paper from '@mui/material/Paper';
 import { StyledTableCell } from "@/common/components/styled-table-cell.component";
 import { StyledTableRow } from "@/common/components/styled-table-row.component";
@@ -10,32 +12,36 @@ import { Member } from "./github-list.vm";
 
 interface Props {
     members: Member[];
-    // onSelect: (login: string) => void;
-  }
+    onSearch: (org: string) => void;
+}
 
 export const GitHubListComponent: React.FC<Props> = (props) => {
-     const { members } = props;
-    const [org, setOrg] = React.useState('lemoncode');
+    const { members, onSearch } = props;
+    const [org, setOrg] = React.useState('Lemoncode');
+
     const navigate = useNavigate();
+    const handleSearch = (e: FormEvent<HTMLFormElement>) =>{
+        e.preventDefault();
+        onSearch(org);
+    }
 
     return <>
         <div>
             <h1>Github {org.toLocaleUpperCase()} Members</h1>
             <br />
-            <div className="buscador">
-                <form>
-                    <TextField
-                        type="text"
-                        value={org}
-                        onChange={(e) => setOrg(e.target.value)}
-                        placeholder="Organización" />
-                    <Button
-                        type="submit"
-                        variant="contained">
-                        Buscar
-                    </Button>
-                </form>
-            </div>
+            <form className="buscador"  onSubmit={handleSearch}>
+                <TextField
+                    className="txtBusqueda"
+                    type="text"
+                    value={org}
+                    onChange={(e) => setOrg(e.target.value)}
+                    placeholder="Buscar..."
+                    label="Organización"
+                />
+                <IconButton type="submit" aria-label="search">
+                    <SearchIcon className="lupa" style={{ fill: "black" }} />
+                </IconButton>
+            </form>
             <hr />
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">

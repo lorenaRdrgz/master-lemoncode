@@ -3,19 +3,21 @@ import { Member } from "./github-list.vm";
 import { GitHubListComponent } from "./github-list.component";
 import { getMembers } from "./github-list.repository";
 
-interface Props {
-  // onSelect: (login: string) => void;
-  org:string;
-}
 
-export const GitHubListContainer: React.FC<Props> = (props) => {
-  // const { onSelect } = props;
-  const {org} = props;
+
+export const GitHubListContainer: React.FC = () => {
+  const [org, setOrg] = React.useState('Lemoncode');
   const [members, setMembers] = React.useState<Member[]>([]);
 
   React.useEffect(() => {
     getMembers(org).then(setMembers);
   }, []);
 
-  return <GitHubListComponent members={members}/>;
+  const handleSearch = (org: string) => {
+    getMembers(org).then(setMembers);
+  }
+
+  return <>
+    <GitHubListComponent members={members} onSearch={handleSearch} />
+  </>;
 };
