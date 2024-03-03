@@ -1,4 +1,4 @@
-export interface Member {
+export interface MemberDetailEntityApi {
   login: string
   id: number
   node_id: string
@@ -31,4 +31,4 @@ export interface Member {
   following: number
   created_at: string
   updated_at: string
-}
+  }

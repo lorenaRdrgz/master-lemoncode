@@ -1,20 +1,19 @@
 import React from "react";
 import { createDefaultMemberDetail } from "./github-details.vm";
 import { GitHubDetailsComponent } from "./github-details.component";
+import { getMember } from "./api/api-github-detail";
 
 interface Props {
-    id:string;
+    id: string;
 }
 
 export const GitHubDetailsContainer: React.FC<Props> = (props) => {
-    const {id} = props;
+    const { id } = props;
     const [member, setMember] = React.useState(createDefaultMemberDetail());
 
     React.useEffect(() => {
-        fetch(`https://api.github.com/user/${id}`)
-            .then(response => response.json()
-                .then(json => setMember(json)))
+        getMember(id).then(setMember);
     }, []);
 
-    return <GitHubDetailsComponent member={member}/>
+    return <GitHubDetailsComponent member={member} />
 }

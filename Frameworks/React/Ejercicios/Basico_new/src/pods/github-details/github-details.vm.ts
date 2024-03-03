@@ -1,5 +1,5 @@
 export interface MemberDetailEntity {
-    id: string;
+    id: number;
     name: string;
     company: string;
     bio: string;
@@ -8,7 +8,7 @@ export interface MemberDetailEntity {
 }
 
 export const createDefaultMemberDetail = (): MemberDetailEntity => ({
-    id: '',
+    id: 0,
     name: '',
     company: '',
     bio: '',
