@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {LoginScene, HomeScene, GitHubListScene, GitHubDetailsScene, RickAndMortyScene, } from "@/scenes"
 import { switchRoutes } from "./routes";
+import { RickAndMortyDetailsScene } from "@/scenes/rick-and-morty-details.scene";
 
 export const AppRouter = () => {
   return (
@@ -13,7 +14,7 @@ export const AppRouter = () => {
         <Route path={switchRoutes.github} element={<GitHubListScene />} />
         <Route path={switchRoutes.rick} element={<RickAndMortyScene />} />        
         <Route path={switchRoutes.githubDetails} element={<GitHubDetailsScene />} />
-        {/* <Route path={switchRoutes.rickDetails} element={<ApiRickScene />} /> */}
+        <Route path={switchRoutes.rickDetails} element={<RickAndMortyDetailsScene />} />
         <Route path="*" element={<div>404 not found!</div>} />
       </Routes>
     </Router>

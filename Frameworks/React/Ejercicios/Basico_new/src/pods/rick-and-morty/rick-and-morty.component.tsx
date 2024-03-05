@@ -54,7 +54,7 @@ export const RickAndMortyComponent: React.FC<Props> = (props) => {
                         {
                             characters.map((char) => (
                                 <>
-                                    <StyledTableRow key={char.id}>
+                                    <StyledTableRow key={char.id} onClick={() => { navigate(routes.rickDetails(char.id)); }}>
                                         <StyledTableCell><img className="avatar" src={char.image} alt="character image" /></StyledTableCell>
                                         <StyledTableCell><span>{char.id}</span></StyledTableCell>
                                         <StyledTableCell><span>{char.name}</span></StyledTableCell>

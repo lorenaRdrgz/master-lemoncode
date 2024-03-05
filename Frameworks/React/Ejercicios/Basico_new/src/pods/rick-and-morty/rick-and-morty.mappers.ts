@@ -6,7 +6,7 @@ export const mapCharacterListToVM = (data: am.Character[]): vm.CharacterEntity[]
 
 const mapCharacterToVM = (data: am.Character): vm.CharacterEntity => ({
 
-  id: data.id,
+  id: data.id.toString(),
   name: data.name,
   status: data.status,
   species: data.species,

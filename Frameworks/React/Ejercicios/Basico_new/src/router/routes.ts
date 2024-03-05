@@ -21,13 +21,13 @@ export const switchRoutes: SwitchRoutes = {
 };
 
 
-interface Routes extends Omit<SwitchRoutes, "githubDetails"> {
+interface Routes extends Omit<SwitchRoutes, "githubDetails" | "rickDetails"> {
   githubDetails: (id: string) => string;
-  // rickDetails: (id: string) => string;
+  rickDetails: (id: string) => string;
 }
 
 export const routes: Routes = {
   ...switchRoutes,
   githubDetails: (id: string) => generatePath(switchRoutes.githubDetails, { id }),
-  // rickDetails: (id: string) => rickDetails(switchRoutes.rickDetails, { id }),
+  rickDetails: (id: string) => generatePath(switchRoutes.rickDetails, { id }),
 };
