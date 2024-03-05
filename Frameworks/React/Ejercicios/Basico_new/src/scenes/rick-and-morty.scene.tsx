@@ -1,12 +1,14 @@
 import React from "react";
 import { CenteredLayout } from "layouts/centered.layout";
-import { RickAndMortyComponent } from "@/pods/rick-and-morty/rick-and-morty.component";
 import { RickAndMortyContainer } from "@/pods/rick-and-morty/rick-and-morty.container";
+import { AppLayout } from "@/layouts/app.layout";
 
 export const RickAndMortyScene: React.FC = () => {
   return (
-    <CenteredLayout>
-      <RickAndMortyContainer />
-    </CenteredLayout>
+    <AppLayout>
+      <CenteredLayout>
+        <RickAndMortyContainer />
+      </CenteredLayout>
+    </AppLayout>
   );
 };

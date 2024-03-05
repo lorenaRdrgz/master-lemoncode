@@ -3,6 +3,7 @@ import { Button, Card, CardActionArea, CardContent, CardMedia, Typography } from
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/router/routes";
 import { MemberDetailEntity } from "./github-details.vm";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 interface Props{
     member: MemberDetailEntity;
@@ -43,12 +44,14 @@ export const GitHubDetailsComponent: React.FC<Props> = (props) => {
                 </CardActionArea>
             </Card>
             <br />
-
             <Button
-                type="submit"
+                className="button"
+                type="button"
                 variant="contained"
-                onClick={handleNavigation}
-            >
+                onClick={() => {
+                    navigate(routes.github);
+                }}>
+                <ArrowBackIosIcon />
                 Volver
             </Button>
         </div>

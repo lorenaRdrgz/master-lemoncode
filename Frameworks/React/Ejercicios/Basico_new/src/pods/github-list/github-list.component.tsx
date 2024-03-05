@@ -1,14 +1,14 @@
 import React, { FormEvent, useEffect } from "react";
-import { Button, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Button } from "@mui/material";
 import { TextField } from "@/common/components/text-field.component";
 import { IconButton } from "@mui/material";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/router/routes";
-import Paper from '@mui/material/Paper';
-import { StyledTableCell } from "@/common/components/styled-table-cell.component";
-import { StyledTableRow } from "@/common/components/styled-table-row.component";
 import { Member } from "./github-list.vm";
+import { TableComponent } from "@/common/components/table.component";
+import { mapMemberListToData } from "./github-list.mappers";
 
 interface Props {
     members: Member[];
@@ -17,19 +17,33 @@ interface Props {
 
 export const GitHubListComponent: React.FC<Props> = (props) => {
     const { members, onSearch } = props;
+    const data = mapMemberListToData(members);
     const [org, setOrg] = React.useState('Lemoncode');
 
     const navigate = useNavigate();
-    const handleSearch = (e: FormEvent<HTMLFormElement>) =>{
+    const handleSearch = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         onSearch(org);
     }
 
     return <>
         <div>
-            <h1>Github {org.toLocaleUpperCase()} Members</h1>
+            <div className="row">
+                <h1>Github {org.toLocaleUpperCase()} Members</h1>
+                <Button
+                    className="button"
+                    type="button"
+                    variant="contained"
+                    onClick={() => {
+                        navigate(routes.home);
+                    }}>
+                    <ArrowBackIosIcon />
+                     Volver
+                </Button>
+            </div>
             <br />
-            <form className="buscador"  onSubmit={handleSearch}>
+            <br />
+            <form className="buscador" onSubmit={handleSearch}>
                 <TextField
                     className="txtBusqueda"
                     type="text"
@@ -43,41 +57,9 @@ export const GitHubListComponent: React.FC<Props> = (props) => {
                 </IconButton>
             </form>
             <hr />
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell>Avatar</StyledTableCell>
-                            <StyledTableCell>Id</StyledTableCell>
-                            <StyledTableCell>Name</StyledTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {
-                            members.map((member) => (
-                                <>
-                                    <StyledTableRow key={member.id} onClick={() => { navigate(routes.githubDetails(member.id)); }}>
-                                        <StyledTableCell><img className="avatar" src={member.avatarUrl} alt="member image" /></StyledTableCell>
-                                        <StyledTableCell><span>{member.id}</span></StyledTableCell>
-                                        <StyledTableCell><span>{member.login}</span></StyledTableCell>
-                                    </StyledTableRow>
-                                </>
-                            ))
-                        }
-                    </TableBody >
-                </Table>
-            </TableContainer>
+            <TableComponent data={data} ruta="github" />
             <hr />
-            <div className="botonera">
-                <Button
-                    type="button"
-                    variant="contained"
-                    onClick={() => {
-                        navigate(routes.home);
-                    }}>
-                    Volver
-                </Button>
-            </div>
+            <br />
         </div>
     </>
 };

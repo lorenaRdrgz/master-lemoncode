@@ -30,3 +30,16 @@
 .txtBusqueda {
   width: 90%;
 }
+
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button{
+  max-height: 35px;
+  top:30px;
+  float: right;
+}

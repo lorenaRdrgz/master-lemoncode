@@ -4,6 +4,7 @@ import MovieIcon from '@mui/icons-material/Movie';
 import FemaleIcon from '@mui/icons-material/Female';
 import MaleIcon from '@mui/icons-material/Male';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/router/routes";
 import { CharacterDetailEntity } from "./rick-and-morty-details.vm";
@@ -38,7 +39,7 @@ export const RickAndMortyDetailsComponent: React.FC<Props> = (props) => {
                             {character.name}   {character.gender == 'Female' && (<FemaleIcon />)}{character.gender == 'Male' && (<MaleIcon />)} {character.gender == 'unknown' && (<QuestionMarkIcon />)}
                         </Typography>
                         <Typography gutterBottom variant="body1" component="div">
-                           {character.species} -  {character.status}
+                            {character.species} -  {character.status}
                         </Typography>
                         {
                             character.episode.map((ep) => (
@@ -60,12 +61,14 @@ export const RickAndMortyDetailsComponent: React.FC<Props> = (props) => {
                 </CardActionArea>
             </Card>
             <br />
-
             <Button
-                type="submit"
+                className="button"
+                type="button"
                 variant="contained"
-                onClick={handleNavigation}
-            >
+                onClick={() => {
+                    navigate(routes.rick);
+                }}>
+                <ArrowBackIosIcon />
                 Volver
             </Button>
         </div >
