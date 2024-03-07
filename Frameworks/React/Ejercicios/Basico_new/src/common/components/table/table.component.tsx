@@ -2,9 +2,9 @@ import React from "react";
 import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/router/routes";
-import { StyledTableCell } from "@/common/components/styled-table-cell.component";
-import { StyledTableRow } from "@/common/components/styled-table-row.component";
-import { Data } from "../models/data.model";
+import { StyledTableCell } from "@/common/components/table/styled-table-cell.component";
+import { StyledTableRow } from "@/common/components/table/styled-table-row.component";
+import { Data } from "../../models/data.model";
 
 interface Props {
     data: Data[],
@@ -28,7 +28,6 @@ export const TableComponent: React.FC<Props> = (props) => {
                 <TableBody>
                     {
                         data.map((d) => (
-                            <>
                                 <StyledTableRow key={d.id} onClick={() => {
                                     if (ruta == 'rick') {
                                         navigate(routes.rickDetails(d.id));
@@ -41,7 +40,6 @@ export const TableComponent: React.FC<Props> = (props) => {
                                     <StyledTableCell><span>{d.id}</span></StyledTableCell>
                                     <StyledTableCell><span>{d.name}</span></StyledTableCell>
                                 </StyledTableRow>
-                            </>
                         ))
                     }
                 </TableBody >

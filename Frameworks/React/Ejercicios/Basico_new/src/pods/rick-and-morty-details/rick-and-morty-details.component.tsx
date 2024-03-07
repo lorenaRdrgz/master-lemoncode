@@ -41,22 +41,20 @@ export const RickAndMortyDetailsComponent: React.FC<Props> = (props) => {
                         <Typography gutterBottom variant="body1" component="div">
                             {character.species} -  {character.status}
                         </Typography>
-                        {
-                            character.episode.map((ep) => (
-                                <>
-                                    <List>
-                                        <ListItem disablePadding>
-                                            <ListItemButton href={ep} target="_blank">
-                                                <ListItemIcon>
-                                                    <MovieIcon />
-                                                </ListItemIcon>
-                                                <ListItemText primary={ep} />
-                                            </ListItemButton>
-                                        </ListItem>
-                                    </List>
-                                </>
-                            ))
-                        }
+                        <List>
+                            {
+                                character.episode.map((ep) => (
+                                    <ListItem disablePadding key={ep}>
+                                        <ListItemButton href={ep} target="_blank">
+                                            <ListItemIcon>
+                                                <MovieIcon />
+                                            </ListItemIcon>
+                                            <ListItemText primary={ep} />
+                                        </ListItemButton>
+                                    </ListItem>
+                                ))
+                            }
+                        </List>
                     </CardContent>
                 </CardActionArea>
             </Card>

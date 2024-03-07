@@ -7,7 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/router/routes";
 import { Member } from "./github-list.vm";
-import { TableComponent } from "@/common/components/table.component";
+import { TableComponent } from "@/common/components/table/table.component";
 import { mapMemberListToData } from "./github-list.mappers";
 
 interface Props {

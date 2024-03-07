@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "@/router/routes";
 import { CharacterEntity } from "./rick-and-morty.vm";
 import { TextField } from "@/common/components/text-field.component";
-import { TableComponent } from "@/common/components/table.component";
+import { TableComponent } from "@/common/components/table/table.component";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 interface Props {
