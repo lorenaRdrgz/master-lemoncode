@@ -1,0 +1,12 @@
+.lupa {
+    width: 1.5em !important;
+    height: 1.5em !important;
+  }
+  
+  .buscador {
+    width: 100%;
+  }
+  
+  .txtBusqueda {
+    width: 90%;
+  }
