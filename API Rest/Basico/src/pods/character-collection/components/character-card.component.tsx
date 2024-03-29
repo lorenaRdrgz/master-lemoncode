@@ -9,8 +9,12 @@ import Avatar from '@mui/material/Avatar/Avatar';
 import IconButton from '@mui/material/IconButton/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import FemaleIcon from '@mui/icons-material/Female';
+import MaleIcon from '@mui/icons-material/Male';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import * as classes from './character-card.styles';
 import { CharacterEntityVm } from '../character-collection.vm';
+import { Link } from '@mui/material';
 
 interface Props {
   character: CharacterEntityVm;
@@ -26,6 +30,11 @@ export const CharacterCard: React.FunctionComponent<Props> = (props) => {
       <CardHeader
         avatar={<Avatar aria-label="Character">{character.id}</Avatar>}
         title={character.name}
+        action={
+          <Typography gutterBottom>
+            {character.gender == 'Female' && (<FemaleIcon />)}{character.gender == 'Male' && (<MaleIcon />)} {character.gender == 'unknown' && (<QuestionMarkIcon />)}
+          </Typography>
+        }
         subheader={character.status}
       />
       <CardContent>
@@ -33,11 +42,11 @@ export const CharacterCard: React.FunctionComponent<Props> = (props) => {
           <CardMedia
             image={character.image}
             title={character.name}
-            style={{ height: 0, paddingTop: '56.25%' }}
+            style={{ height: 300, width: 300, paddingTop: '56.25%' }}
           />
-          <Typography variant="subtitle1" gutterBottom>
+          <Link href={character.url} target="_blank" underline="none" style={{ marginTop: '20px' }}>
             {character.url}
-          </Typography>
+          </Link>
         </div>
       </CardContent>
       <CardActions>

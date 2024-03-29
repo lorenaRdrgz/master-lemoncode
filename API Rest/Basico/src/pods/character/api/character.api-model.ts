@@ -11,9 +11,13 @@ export interface CharacterApi {
   episode:  string[];
   url:      string;
   created:  Date;
+  metadata: {
+    path: string;
+  };
 }
 
 export interface Location {
   name: string;
   url:  string;
 }
+

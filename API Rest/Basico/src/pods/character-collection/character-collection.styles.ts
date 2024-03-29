@@ -23,4 +23,10 @@ export const list = css`
   @media (min-width: ${theme.breakpoints.values.md}px) {
     grid-template-columns: repeat(3, 1fr);
   }
+  
+  @media (min-width: ${theme.breakpoints.values.lg}px) {
+    grid-column-gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
 `;

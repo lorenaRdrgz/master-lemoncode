@@ -45,7 +45,7 @@ export const CharacterCollectionComponent: React.FunctionComponent<Props> = (pro
           label="Nombre"
         />
         <IconButton type="submit" aria-label="search">
-          <SearchIcon className="lupa" style={{ fill: "black" }} />
+          <SearchIcon className="lupa" style={{ fill: "#1976D2" }} />
         </IconButton>
       </form>
 
@@ -62,7 +62,7 @@ export const CharacterCollectionComponent: React.FunctionComponent<Props> = (pro
         ))}
       </ul>
       <Stack spacing={2}>
-        <Pagination count={10} page={page} onChange={handleChange} />
+        <Pagination count={42} page={page} onChange={handleChange} />
       </Stack>
     </div>
   );

@@ -1,12 +1,14 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 import {
   TextFieldComponent,
   SelectComponent,
@@ -34,14 +36,6 @@ export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
     }
   });
 
-  const handleCheck = (id:string) => {
-    episodes.forEach(x=>{
-      if(x.id == id){
-        x.checked = !x.checked;
-      }
-    })    
-  }
-
   return (
     <Formik
       onSubmit={onSave}
@@ -55,20 +49,15 @@ export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
           <TextFieldComponent name="status" label="Status" />
           <TextFieldComponent name="gender" label="Gender" />
           <SelectComponent name="location" label="Location" items={locations} />
-          <List>
+          <InputLabel style={{margin:'5px 0px', fontSize:'20px', color:'#1976D2', alignSelf:'start'}}>Episodes</InputLabel>
+          <List style={{width:'100%', height:'300px', border:'solid 2px #1976D2', margin:'10px', overflow: 'auto'}}>
+          
             {
               episodes.map((ep) => (
                 <ListItem disablePadding key={ep.id}>
                   <ListItemButton>
                     <ListItemIcon>
-                      <Checkbox
-                        edge="start"
-                        checked={ep.checked}
-                        tabIndex={-1}
-                        disableRipple
-                        inputProps={{ 'aria-labelledby': ep.name }}
-                        onClick={(e) => handleCheck(ep.id)}
-                      />
+                    {ep.checked && (<CheckIcon style={{fill:'green'}}/>)}{!ep.checked && (<CloseIcon style={{fill:'red'}}/>)}
                     </ListItemIcon>
                     <ListItemText primary={ep.name} />
                   </ListItemButton>
@@ -78,7 +67,7 @@ export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
           </List>
 
 
-          <Button type="submit" variant="contained" color="primary">
+          <Button style={{width:'100%'}} type="submit" variant="contained" color="primary">
             Save
           </Button>
         </Form>
