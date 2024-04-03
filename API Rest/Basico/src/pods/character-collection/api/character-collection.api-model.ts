@@ -11,9 +11,7 @@ export interface CharacterEntityApi {
   episode:  string[];
   url:      string;
   created:  Date;
-  metadata: {
-    path: string;
-  };
+  bestSentences: string;
 }
 
 export interface Location {

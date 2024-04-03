@@ -7,4 +7,10 @@ export interface CharacterEntityVm {
   species: string;
   type: string;
   url: string;
+  location: Location;
+  bestSentences: string;
+}
+
+export interface Location {
+  name: string;
 }

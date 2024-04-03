@@ -3,11 +3,9 @@ import { LocationApi } from './location.api-model';
 import { EpisodeApi } from './episode.api-model';
 import Axios from 'axios';
 
-// const characterUrl = '/api/characters';
-// const locationsUrl = '/api/locations';
-// const episodesUrl = '/api/characters';
+const characterUrl = '/api/character';
+// const characterUrl = 'https://rickandmortyapi.com/api/character';
 
-const characterUrl = 'https://rickandmortyapi.com/api/character';
 const locationsUrl = 'https://rickandmortyapi.com/api/location';
 const episodesUrl = 'https://rickandmortyapi.com/api/episode';
 
@@ -27,7 +25,6 @@ export const getEpisodes = async (): Promise<EpisodeApi[]> => {
 };
 
 export const saveCharacter = async (character: CharacterApi): Promise<boolean> => {
-  console.log(character)
   if(character.id){
     await Axios.put<CharacterApi>(`${characterUrl}/${character.id}`, character)
   }

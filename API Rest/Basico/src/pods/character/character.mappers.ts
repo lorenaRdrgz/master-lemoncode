@@ -17,8 +17,8 @@ export const mapCharacterFromApiToVm = (
   gender: data.gender,
   image: data.image,
   url: data.url,
-  location: data.location.name,
-  locationId: data.location.url.split("/")[data.location.url.split("/").length - 1]
+  location: data.location,
+  bestSentences:data.bestSentences,
 
 });
 
@@ -34,7 +34,7 @@ export const mapCharacterFromVmToApi = (data: viewModel.CharacterVM): apiModel.C
   image: data.image,
   url: data.url,
   location: data.location,
-  locationId: data.locationId
+  bestSentences:data.bestSentences,
 } as unknown) as apiModel.CharacterApi);
 
 export const mapLocationsFromApiToVm = (

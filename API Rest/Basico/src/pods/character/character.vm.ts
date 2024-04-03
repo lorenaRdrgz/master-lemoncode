@@ -9,9 +9,14 @@ export interface CharacterVM {
   episode:  string[];
   url:      string;
   created:  Date;
-  location: string;
-  locationId:string;
+  location: Location;
+  bestSentences: string;
 }
+
+export interface Location {
+  name: string;
+}
+
 
 export const createDefaultCharacterDetail = (): CharacterVM => ({
   id:       0,
@@ -24,6 +29,6 @@ export const createDefaultCharacterDetail = (): CharacterVM => ({
   episode:  [],
   url:      '',
   created:  new Date('01/01/1900'),
-  location:'',
-  locationId:''
+  location:{name:''},
+  bestSentences: '',
 });
