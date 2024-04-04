@@ -7,10 +7,12 @@ import { CharacterCollectionComponent } from './character-collection.component';
 
 export const CharacterCollectionContainer = () => {
   const { characterCollection, loadCharacterCollection } = useCharacterCollection();
+  const [ filteredCharacterCollection, setFilteredCharacterCollection ] =  React.useState(characterCollection);
+  const [page, setPage] = React.useState(1);
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    loadCharacterCollection("1", "");
+    loadCharacterCollection();
   }, []);
 
   const handleCreateCharacter = () => {
@@ -23,20 +25,39 @@ export const CharacterCollectionContainer = () => {
 
   const handleDelete = async (id: string) => {
     await deleteCharacter(id);
-    loadCharacterCollection("1", "");
+    loadCharacterCollection();
   };
 
-  const hadleSearch = async (page:string,name:string) =>{
-    loadCharacterCollection(page,name);
-  }
+  const filterCharacterCollection = (name: string) => {
+    if (!name) {
+      setFilteredCharacterCollection(
+        characterCollection.slice((page - 1) * 5, page * 5)
+      );
+      return;
+    }
+    setFilteredCharacterCollection(
+      characterCollection.filter((character) =>
+        character.name.toLowerCase().includes(name.toLowerCase())
+      )
+    );
+  };
+
+  const onPageChange = (page: number) => {
+    setPage(page);
+    setFilteredCharacterCollection(
+      characterCollection.slice((page - 1) * 5, page * 5)
+    );
+  };
 
   return (
     <CharacterCollectionComponent
       characterCollection={characterCollection}
+      filteredCharacterCollection={filteredCharacterCollection}
       onCreateCharacter={handleCreateCharacter}
       onEdit={handleEdit}
       onDelete={handleDelete}
-      onSearch={hadleSearch}
+      onPaginate={onPageChange}
+      onFilter={filterCharacterCollection}
     />
   );
 };

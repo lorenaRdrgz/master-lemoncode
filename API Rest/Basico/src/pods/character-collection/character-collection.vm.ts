@@ -13,4 +13,5 @@ export interface CharacterEntityVm {
 
 export interface Location {
   name: string;
+  url:  string;
 }

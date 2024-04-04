@@ -5,16 +5,10 @@ import { CharacterEntityApi } from './character-collection.api-model';
 const characterUrl = '/api/character';
 // const characterUrl = 'https://rickandmortyapi.com/api/character';
 
-export const getCharacterCollection = async (page: string, name: string): Promise<CharacterEntityApi[]> => {
-  let url = '';
-  if (name == '') {
-    url = `${characterUrl}?page=${page}`;
-
-  }
-  else {
-    url = `${characterUrl}?name=${name}&${page}`;
-  }
-  const { data } = await Axios.get(url);
+export const getCharacterCollection = async (): Promise<
+  CharacterEntityApi[]
+> => {
+  const { data } = await Axios.get(characterUrl);
   return data;
 };
 

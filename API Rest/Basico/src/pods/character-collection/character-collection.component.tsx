@@ -11,26 +11,30 @@ import { CharacterCard } from './components/character-card.component';
 
 interface Props {
   characterCollection: CharacterEntityVm[];
+  filteredCharacterCollection: CharacterEntityVm[];
   onCreateCharacter: () => void;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
-  onSearch: (page:string, name: string) => void;
-
+  onPaginate: (page:number) => void;
+  onFilter: (name: string) => void;
 }
 
 export const CharacterCollectionComponent: React.FunctionComponent<Props> = (props) => {
-  const { characterCollection, onCreateCharacter, onEdit, onDelete, onSearch } = props;
+  const { characterCollection, filteredCharacterCollection, onCreateCharacter, onEdit, onDelete, onPaginate, onFilter } = props;
   const [page, setPage] = React.useState(1);
   const [name, setName] = React.useState("");
+  
+  React.useEffect(() => {
+    onFilter(name);
+  }, []);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSearch(page.toString(), name);
-  }
+    onFilter(name);
+  };
 
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-    onSearch(page.toString(), name);
+  const handlePageChange = (event: React.ChangeEvent, page: number) => {
+    onPaginate(page);
   };
 
   return (
@@ -55,14 +59,14 @@ export const CharacterCollectionComponent: React.FunctionComponent<Props> = (pro
       </Button>
 
       <ul className={classes.list}>
-        {characterCollection.map((char) => (
+        {filteredCharacterCollection.map((char) => (
           <li key={char.id}>
             <CharacterCard character={char} onEdit={onEdit} onDelete={onDelete} />
           </li>
         ))}
       </ul>
       <Stack spacing={2}>
-        <Pagination count={42} page={page} onChange={handleChange} />
+        <Pagination count={filteredCharacterCollection.length - 1} page={page} onChange={handlePageChange} />
       </Stack>
     </div>
   );

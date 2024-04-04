@@ -49,7 +49,7 @@ export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
           <TextFieldComponent name="status" label="Status" />
           <TextFieldComponent name="gender" label="Gender" />
           <TextFieldComponent name="url" label="Url" />
-          <SelectComponent name="location" label="Location" items={locations} />
+          <SelectComponent name="location.name" label="Location" items={locations} />
           <TextFieldComponent name="bestSentences" label="Best Sentences" multiline={true} rows={3} />
           <InputLabel style={{margin:'5px 0px', fontSize:'20px', color:'#1976D2', alignSelf:'start'}}>Episodes</InputLabel>
           <List style={{width:'100%', height:'300px', border:'solid 2px #1976D2', margin:'10px', overflow: 'auto'}}>
