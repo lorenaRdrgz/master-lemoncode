@@ -13,7 +13,7 @@ export const createDefaultCharacter = (): Character => ({
   created:  '01/01/1900',
   location:{name:'', url:''},
   origin:{name:'', url:''},
-  bestSentences: '',
+  bestSentences: ''
 });
 
 export const mockCharacters: Character[] = [

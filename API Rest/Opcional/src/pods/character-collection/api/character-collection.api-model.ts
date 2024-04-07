@@ -18,3 +18,8 @@ export interface Location {
   name: string;
   url:  string;
 }
+
+export interface GetCharacterColecionResponse {
+  characters: CharacterEntityApi[];
+}
+

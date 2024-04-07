@@ -15,6 +15,7 @@ module.exports = merge(base, {
     hot: true,
     proxy: {
       '/api': 'http://localhost:3000',
+      '/graphql': 'http://localhost:3000',
     },
   },
   module: {

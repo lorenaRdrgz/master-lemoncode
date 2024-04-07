@@ -1,7 +1,9 @@
-import { CharacterApi } from './character.api-model';
+import { CharacterApi, GetCharacterResponse } from './character.api-model';
 import { LocationApi } from './location.api-model';
 import { EpisodeApi } from './episode.api-model';
 import Axios from 'axios';
+import { graphqlClient } from 'core/graphql';
+import { gql } from 'graphql-request';
 
 const characterUrl = '/api/character';
 // const characterUrl = 'https://rickandmortyapi.com/api/character';
@@ -10,8 +12,30 @@ const locationsUrl = 'https://rickandmortyapi.com/api/location';
 const episodesUrl = 'https://rickandmortyapi.com/api/episode';
 
 export const getCharacter = async (id: string): Promise<CharacterApi> => {
-  const { data } = await Axios.get(`${characterUrl}/${id}`);
-  return data;
+  const query = gql`
+    query($characterId:Int){
+      character(id:$characterId){
+        id
+        name
+        status
+        species
+        type
+        gender
+        origin
+        location{
+          name
+          url
+        }
+        image
+        episode
+        url
+        created
+        bestSentences
+      }
+    }
+  `
+  const { character } = await graphqlClient.request<GetCharacterResponse>(query, { characterId: parseInt(id) })
+  return character;
 };
 
 export const getLocations = async (): Promise<LocationApi[]> => {
@@ -25,12 +49,12 @@ export const getEpisodes = async (): Promise<EpisodeApi[]> => {
 };
 
 export const saveCharacter = async (character: CharacterApi): Promise<boolean> => {
-  if(character.id){
-    await Axios.put<CharacterApi>(`${characterUrl}/${character.id}`, character)
-  }
-  else{
-    await Axios.post<CharacterApi>(characterUrl, character)
-  }
+  const mutation = gql`
+    mutation($character: CharacterInput!){
+      saveCharacter(character:$character)
+    }
+  `
+  await graphqlClient.request(mutation, {character});
 
   return true;
 };

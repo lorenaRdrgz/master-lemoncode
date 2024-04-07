@@ -19,3 +19,8 @@ export interface Location {
   url:  string;
 }
 
+export interface GetCharacterResponse {
+  character: CharacterApi;
+}
+
+
