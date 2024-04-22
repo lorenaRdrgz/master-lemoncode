@@ -683,23 +683,6 @@
       "url": "https://rickandmortyapi.com/api/character/20",
       "created": "2017-11-04T22:34:53.659Z",
       "bestSentences": []
-    },
-    {
-      "id": 21,
-      "name": "Ana",
-      "status": "Alive",
-      "species": "",
-      "type": "",
-      "gender": "Female",
-      "image": "/thumbnails/new-character.jpeg",
-      "episode": [],
-      "url": "www.cosas.net",
-      "created": "1899-12-31T23:00:00.000Z",
-      "location": {
-        "name": "Anatomy Park",
-        "url": ""
-      },
-      "bestSentences": "holi"
     }
   ]
 }

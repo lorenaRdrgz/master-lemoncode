@@ -4,10 +4,11 @@ import { linkRoutes } from 'core/router';
 import { deleteCharacter } from './api';
 import { useCharacterCollection } from './character-collection.hook';
 import { CharacterCollectionComponent } from './character-collection.component';
+import { CharacterEntityVm } from './character-collection.vm';
 
 export const CharacterCollectionContainer = () => {
   const { characterCollection, loadCharacterCollection } = useCharacterCollection();
-  const [ filteredCharacterCollection, setFilteredCharacterCollection ] =  React.useState(characterCollection);
+  const [ filteredCharacterCollection, setFilteredCharacterCollection ] =  React.useState<CharacterEntityVm[]>([]);
   const [page, setPage] = React.useState(1);
   const navigate = useNavigate();
 
@@ -52,7 +53,6 @@ export const CharacterCollectionContainer = () => {
   return (
     <CharacterCollectionComponent
       characterCollection={characterCollection}
-      filteredCharacterCollection={filteredCharacterCollection}
       onCreateCharacter={handleCreateCharacter}
       onEdit={handleEdit}
       onDelete={handleDelete}
