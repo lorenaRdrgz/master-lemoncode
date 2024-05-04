@@ -2,8 +2,9 @@ import { Character, deleteCharacter, getCharacter, getCharactersList, insertChar
 
 export const resolvers = {
     Query: {
-        characters: async (): Promise<Character[]> => {
-            const characters = await getCharactersList();
+        characters: async (_, args): Promise<Character[]> => {
+            const {page, name} = args;
+            const characters = await getCharactersList(page, name);
             return characters;
         },
         character: async (_, args): Promise<Character> => {

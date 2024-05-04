@@ -5,34 +5,29 @@ import Axios from 'axios';
 import { graphqlClient } from 'core/graphql';
 import { gql } from 'graphql-request';
 
-const characterUrl = '/api/character';
-// const characterUrl = 'https://rickandmortyapi.com/api/character';
+
+const characterUrl = 'https://rickandmortyapi.com/graphql';
 
 const locationsUrl = 'https://rickandmortyapi.com/api/location';
 const episodesUrl = 'https://rickandmortyapi.com/api/episode';
 
 export const getCharacter = async (id: string): Promise<CharacterApi> => {
   const query = gql`
-    query($characterId:Int){
-      character(id:$characterId){
-        id
-        name
-        status
-        species
-        type
-        gender
-        origin
-        location{
-          name
-          url
-        }
-        image
-        episode
-        url
-        created
-        bestSentences
+    query ($id: ID!) {
+      character(id:$id) {
+            id
+            name
+            status
+            gender
+            image
+            location {
+              name
+            }
+            status
+            species
+            type
       }
-    }
+}
   `
   const { character } = await graphqlClient.request<GetCharacterResponse>(query, { characterId: parseInt(id) })
   return character;
@@ -54,7 +49,7 @@ export const saveCharacter = async (character: CharacterApi): Promise<boolean> =
       saveCharacter(character:$character)
     }
   `
-  await graphqlClient.request(mutation, {character});
+  await graphqlClient.request(mutation, { character });
 
   return true;
 };

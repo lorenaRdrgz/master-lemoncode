@@ -4,15 +4,30 @@ import { CharacterEntityApi, GetCharacterColecionResponse } from './character-co
 import { gql } from 'graphql-request'
 import { graphqlClient } from 'core/graphql';
 
-const characterUrl = '/api/character';
-// const characterUrl = 'https://rickandmortyapi.com/api/character';
+interface FilterCharacter {
+  name: String
+  status: String
+  species: String
+  type: String
+  gender: String
+}
 
-export const getCharacterCollection = async (): Promise<CharacterEntityApi[]> => {
+const characterUrl = 'https://rickandmortyapi.com/graphql';
+
+export const getCharacterCollection = async (page:string, name:string): Promise<CharacterEntityApi[]> => {
+
+  let filter:FilterCharacter = {
+    name: name,
+    status: undefined,
+    species: undefined,
+    type: undefined,
+    gender: undefined
+  }
+
 
   const query = gql`
-    query{
-      query {
-        characters(page: 1, filter: { name: "" }) {
+      query ($page:Int, $filter:FilterCharacter) {
+        characters(page: $page, filter: $filter) {
           info {
             count
           }
@@ -31,10 +46,9 @@ export const getCharacterCollection = async (): Promise<CharacterEntityApi[]> =>
           }
         }
       }     
-    }
   `;
 
-  const { characters } = await graphqlClient.request<GetCharacterColecionResponse>(query)
+  const { characters } = await graphqlClient.request<GetCharacterColecionResponse>(query, { page: parseInt(page), filter:filter })
 
   return characters;
 };

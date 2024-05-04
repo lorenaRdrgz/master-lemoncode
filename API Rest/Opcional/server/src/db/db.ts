@@ -4,7 +4,7 @@ import {Character, CharacterEdit} from './models';
 
 let characters = [...mockCharacters];
 
-export const getCharactersList = async (): Promise<Character[]> => characters;
+export const getCharactersList = async (page, name): Promise<Character[]> => characters;
 
 export const getCharacter = async (id: string): Promise<Character> =>
   characters.find((c) => c.id === parseInt(id)) as Character;
