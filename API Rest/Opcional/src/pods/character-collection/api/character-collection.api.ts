@@ -49,7 +49,6 @@ export const getCharacterCollection = async (page:string, name:string): Promise<
   `;
 
   const { characters } = await graphqlClient.request<GetCharacterColecionResponse>(query, { page: parseInt(page), filter:filter })
-
   return characters;
 };
 
