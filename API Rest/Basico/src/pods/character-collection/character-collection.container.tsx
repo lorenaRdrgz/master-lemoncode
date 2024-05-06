@@ -12,9 +12,21 @@ export const CharacterCollectionContainer = () => {
   const [page, setPage] = React.useState(1);
   const navigate = useNavigate();
 
+  const onLoadCharacterCollection = async () => {
+    try {
+      await loadCharacterCollection();
+      console.log('characterCollection:')
+      console.log(characterCollection)
+      setFilteredCharacterCollection(characterCollection);
+      console.log('filteredCharacterCollection')
+      console.log(filteredCharacterCollection)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   React.useEffect(() => {
-    loadCharacterCollection();
-    setFilteredCharacterCollection(characterCollection);
+    onLoadCharacterCollection();
   }, []);
 
   const handleCreateCharacter = () => {
