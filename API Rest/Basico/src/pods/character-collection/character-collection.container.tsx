@@ -8,12 +8,13 @@ import { CharacterEntityVm } from './character-collection.vm';
 
 export const CharacterCollectionContainer = () => {
   const { characterCollection, loadCharacterCollection } = useCharacterCollection();
-  const [ filteredCharacterCollection, setFilteredCharacterCollection ] =  React.useState<CharacterEntityVm[]>([]);
+  const [filteredCharacterCollection, setFilteredCharacterCollection] = React.useState<CharacterEntityVm[]>([]);
   const [page, setPage] = React.useState(1);
   const navigate = useNavigate();
 
   React.useEffect(() => {
     loadCharacterCollection();
+    setFilteredCharacterCollection(characterCollection);
   }, []);
 
   const handleCreateCharacter = () => {
@@ -27,6 +28,7 @@ export const CharacterCollectionContainer = () => {
   const handleDelete = async (id: string) => {
     await deleteCharacter(id);
     loadCharacterCollection();
+    setFilteredCharacterCollection(characterCollection);
   };
 
   const filterCharacterCollection = (name: string) => {
@@ -52,7 +54,7 @@ export const CharacterCollectionContainer = () => {
 
   return (
     <CharacterCollectionComponent
-      characterCollection={characterCollection}
+      filteredCharacterCollection={filteredCharacterCollection}
       onCreateCharacter={handleCreateCharacter}
       onEdit={handleEdit}
       onDelete={handleDelete}
