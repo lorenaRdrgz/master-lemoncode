@@ -15,11 +15,6 @@ export const CharacterCollectionContainer = () => {
   const onLoadCharacterCollection = async () => {
     try {
       await loadCharacterCollection();
-      console.log('characterCollection:')
-      console.log(characterCollection)
-      setFilteredCharacterCollection(characterCollection);
-      console.log('filteredCharacterCollection')
-      console.log(filteredCharacterCollection)
     } catch (error) {
       console.error(error);
     }
@@ -28,6 +23,10 @@ export const CharacterCollectionContainer = () => {
   React.useEffect(() => {
     onLoadCharacterCollection();
   }, []);
+
+  React.useEffect(() => {
+    setFilteredCharacterCollection(characterCollection);
+  }, [characterCollection]);
 
   const handleCreateCharacter = () => {
     navigate(linkRoutes.createCharacter);
