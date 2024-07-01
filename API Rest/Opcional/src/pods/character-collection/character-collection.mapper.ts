@@ -3,7 +3,7 @@ import * as apiModel from './api/character-collection.api-model';
 import * as viewModel from './character-collection.vm';
 
 const mapCharacterFromApiToVm = (
-  data: apiModel.CharacterEntityApi
+  data: apiModel.CharacterResult
 ): viewModel.CharacterEntityVm => ({
   id: data.id.toString(),
   name: data.name,
@@ -18,6 +18,6 @@ const mapCharacterFromApiToVm = (
 });
 
 export const mapCharacterCollectionFromApiToVm = (
-  data: apiModel.CharacterEntityApi[]
+  data: apiModel.CharacterEntityApi
 ): viewModel.CharacterEntityVm[] =>
-  mapToCollection(data, mapCharacterFromApiToVm);
+  mapToCollection(data.results, mapCharacterFromApiToVm);

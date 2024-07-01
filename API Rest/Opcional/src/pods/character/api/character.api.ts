@@ -2,11 +2,12 @@ import { CharacterApi, GetCharacterResponse } from './character.api-model';
 import { LocationApi } from './location.api-model';
 import { EpisodeApi } from './episode.api-model';
 import Axios from 'axios';
-import { graphqlClient } from 'core/graphql';
-import { gql } from 'graphql-request';
+import { GraphQLClient, gql } from 'graphql-request';
 
 
 const characterUrl = 'https://rickandmortyapi.com/graphql';
+
+const graphqlClient = new GraphQLClient(characterUrl);
 
 const locationsUrl = 'https://rickandmortyapi.com/api/location';
 const episodesUrl = 'https://rickandmortyapi.com/api/episode';
@@ -26,10 +27,14 @@ export const getCharacter = async (id: string): Promise<CharacterApi> => {
             status
             species
             type
+            episode{
+              id
+              name
+            }
       }
 }
   `
-  const { character } = await graphqlClient.request<GetCharacterResponse>(query, { characterId: parseInt(id) })
+  const { character } = await graphqlClient.request<GetCharacterResponse>(query, { id: parseInt(id) })
   return character;
 };
 

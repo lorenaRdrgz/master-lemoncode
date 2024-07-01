@@ -30,7 +30,7 @@ export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
   const { character, locations, episodes, onSave } = props;
 
   episodes.forEach(x => {
-    let existe = character.episode.find(y => y.split("/")[y.split("/").length - 1] == x.id);
+    let existe = character.episode.find(y => y.name == x.name);
     if (existe) {
       x.checked = true;
     }

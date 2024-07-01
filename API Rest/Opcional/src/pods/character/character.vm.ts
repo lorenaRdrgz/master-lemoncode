@@ -6,7 +6,7 @@ export interface CharacterVM {
   type:     string;
   gender:   string;
   image:    string;
-  episode:  string[];
+  episode:  Episode[];
   url:      string;
   created:  Date;
   location: Location;
@@ -16,6 +16,11 @@ export interface CharacterVM {
 export interface Location {
   name: string;
   url:  string;
+}
+
+export interface Episode {
+  name: string;
+  id:  string;
 }
 
 export const createDefaultCharacterDetail = (): CharacterVM => ({

@@ -1,4 +1,9 @@
 export interface CharacterEntityApi {
+  info:any;
+  results:CharacterResult[];
+}
+
+export interface CharacterResult{
   id:       number;
   name:     string;
   status:   string;
@@ -20,6 +25,6 @@ export interface Location {
 }
 
 export interface GetCharacterColecionResponse {
-  characters: CharacterEntityApi[];
+  characters: CharacterEntityApi;
 }
 

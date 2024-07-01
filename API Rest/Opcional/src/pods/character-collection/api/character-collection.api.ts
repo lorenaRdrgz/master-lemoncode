@@ -1,8 +1,7 @@
 
 import Axios from 'axios';
 import { CharacterEntityApi, GetCharacterColecionResponse } from './character-collection.api-model';
-import { gql } from 'graphql-request'
-import { graphqlClient } from 'core/graphql';
+import { GraphQLClient, gql } from 'graphql-request'
 
 interface FilterCharacter {
   name: String
@@ -14,7 +13,9 @@ interface FilterCharacter {
 
 const characterUrl = 'https://rickandmortyapi.com/graphql';
 
-export const getCharacterCollection = async (page:string, name:string): Promise<CharacterEntityApi[]> => {
+const graphqlClient = new GraphQLClient(characterUrl);
+
+export const getCharacterCollection = async (page:string, name:string): Promise<CharacterEntityApi> => {
 
   let filter:FilterCharacter = {
     name: name,
@@ -49,7 +50,7 @@ export const getCharacterCollection = async (page:string, name:string): Promise<
   `;
 
   const { characters } = await graphqlClient.request<GetCharacterColecionResponse>(query, { page: parseInt(page), filter:filter })
-  return characters;
+    return characters;
 };
 
 export const deleteCharacter = async (id: string): Promise<boolean> => {
